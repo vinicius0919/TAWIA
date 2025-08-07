@@ -2,7 +2,7 @@ const btn = document.getElementById("start");
 const dataElement = document.getElementById("data");
 
 const calendarificKey = `E9i7oKuIWFkShu7kR8MRQCDBVRa7DGjp`;
-const airQualityKey = "f2edcdbe-bdf4-4652-9ad0-a8ab0519744e"
+const airQualityKey = "f2edcdbe-bdf4-4652-9ad0-a8ab0519744e";
 
 function criarElemento(tipo, classe, conteudo = "") {
   const el = document.createElement(tipo);
@@ -11,14 +11,13 @@ function criarElemento(tipo, classe, conteudo = "") {
   return el;
 }
 
-const translateToPortuguese = (text)=>{
-
-}
+const translateToPortuguese = (text) => {};
 
 function interpretarAQI(aqi) {
   if (aqi <= 50) return { status: "Boa", cor: "green" };
   if (aqi <= 100) return { status: "Moderada", cor: "yellow" };
-  if (aqi <= 150) return { status: "Não saudável para sensíveis", cor: "orange" };
+  if (aqi <= 150)
+    return { status: "Não saudável para sensíveis", cor: "orange" };
   if (aqi <= 200) return { status: "Não saudável", cor: "red" };
   if (aqi <= 300) return { status: "Muito não saudável", cor: "purple" };
   return { status: "Perigosa", cor: "brown" };
@@ -68,7 +67,11 @@ btn.addEventListener("click", async () => {
     .catch((err) => console.error(err));
 
   // Localização
-  const locationTitle = criarElemento("h1", "section-title", "📍 Sua Localização");
+  const locationTitle = criarElemento(
+    "h1",
+    "section-title",
+    "📍 Sua Localização"
+  );
   const locationInfo = criarElemento(
     "p",
     "location-info",
@@ -79,7 +82,11 @@ btn.addEventListener("click", async () => {
   // Clima
   const weatherData = await consultOpenMeteo(local.latitude, local.longitude);
   if (weatherData) {
-    const weatherTitle = criarElemento("h2", "section-subtitle", "🌤️ Clima de Hoje");
+    const weatherTitle = criarElemento(
+      "h2",
+      "section-subtitle",
+      "🌤️ Clima de Hoje"
+    );
     const clima = criarElemento(
       "p",
       "weather-info",
@@ -91,11 +98,18 @@ btn.addEventListener("click", async () => {
   }
 
   // Qualidade do Ar
-  const airQualityData = await consultAirQuality(local.latitude, local.longitude);
+  const airQualityData = await consultAirQuality(
+    local.latitude,
+    local.longitude
+  );
   if (airQualityData) {
     const aqi = airQualityData.data.current.pollution.aqius;
     const aqiInfo = interpretarAQI(aqi);
-    const airTitle = criarElemento("h2", "section-subtitle", "💨 Qualidade do Ar");
+    const airTitle = criarElemento(
+      "h2",
+      "section-subtitle",
+      "💨 Qualidade do Ar"
+    );
     const airInfo = criarElemento(
       "p",
       `air-quality ${aqiInfo.cor}`,
@@ -103,7 +117,13 @@ btn.addEventListener("click", async () => {
     );
     dataElement.append(airTitle, airInfo);
   } else {
-    dataElement.append(criarElemento("p", "error-msg", "⚠️ Não foi possível obter a qualidade do ar."));
+    dataElement.append(
+      criarElemento(
+        "p",
+        "error-msg",
+        "⚠️ Não foi possível obter a qualidade do ar."
+      )
+    );
   }
 
   // Feriados
@@ -111,20 +131,34 @@ btn.addEventListener("click", async () => {
   const feriados = await consultarFeriados(ano, local.country.toUpperCase());
 
   if (feriados && feriados.response.holidays.length > 0) {
-    const feriadoTitle = criarElemento("h2", "section-subtitle", "🎉 Feriados Nacionais");
+    const feriadoTitle = criarElemento(
+      "h2",
+      "section-subtitle",
+      "🎉 Feriados Nacionais"
+    );
     const lista = document.createElement("ul");
     lista.className = "holiday-list";
 
     feriados.response.holidays.forEach((feriado) => {
       const item = document.createElement("li");
       item.className = "holiday-item";
-      item.innerHTML = `<span class="holiday-date">${feriado.date.iso}</span> – <strong>${feriado.name}</strong> <em>(${feriado.type.join(", ")})</em>`;
+      const data = new Date(feriado.date.iso);
+      const dataFormatada = data.toLocaleDateString("pt-BR");
+      item.innerHTML = `<span class="holiday-date">${dataFormatada}</span> – <strong>${
+        feriado.name
+      }</strong> <em>(${feriado.type.join(", ")})</em>`;
       lista.appendChild(item);
     });
 
     dataElement.append(feriadoTitle, lista);
   } else {
-    dataElement.append(criarElemento("p", "info-msg", "📅 Nenhum feriado encontrado para este ano."));
+    dataElement.append(
+      criarElemento(
+        "p",
+        "info-msg",
+        "📅 Nenhum feriado encontrado para este ano."
+      )
+    );
   }
 });
 
