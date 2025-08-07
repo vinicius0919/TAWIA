@@ -1,0 +1,68 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.btn-start{
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 12px;
+}
+.info-container {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+}
+
+.section-title {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #333;
+    border-bottom: 2px solid #4CAF50;
+    padding-bottom: 5px;
+}
+
+.section-subtitle {
+    font-size: 20px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    color: #555;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 3px;
+}
+
+.location-info, .time-info, .date-info, .weather-info, .air-quality, .holiday-list {
+    margin-bottom: 15px;
+}
+
+.weather-info, .temp-max, .temp-min, .precip {
+    font-weight: bold;
+}
+
+.air-quality, .aqi-status, .green, .yellow, .orange, .red, .purple, .brown {
+    font-weight: bold;
+}
+
+.error-msg, .info-msg {
+    font-style: italic;
+    color: #777;
+}
+
+.holiday-list, .holiday-item, .holiday-date {
+    margin-bottom: 10px;
+}
