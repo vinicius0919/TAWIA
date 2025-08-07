@@ -1,8 +1,8 @@
 const btn = document.getElementById("start");
 const dataElement = document.getElementById("data");
 
-const calendarificKey = ${{ secrets.CALENDARIFIC_KEY }};
-const airQualityKey = ${{ secrets.AIR_QUALITY_KEY }};
+const calendarificKey = `E9i7oKuIWFkShu7kR8MRQCDBVRa7DGjp`;
+const airQualityKey = "f2edcdbe-bdf4-4652-9ad0-a8ab0519744e"
 
 function criarElemento(tipo, classe, conteudo = "") {
   const el = document.createElement(tipo);
