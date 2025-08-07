@@ -17,7 +17,7 @@ const consultOpenMeteo = async (lat, lon) => {
   }
 };
 btn.addEventListener("click", async () => {
-  const local = await fetch(`http://ip-api.com/json/`)
+  const local = await fetch(`https://ipapi.co/json/`)
     .then((response) => response.json())
     .catch((err) => console.log(err));
   console.log(local);
@@ -25,13 +25,12 @@ btn.addEventListener("click", async () => {
     "Você está em: " +
     local.city +
     ", " +
-    local.regionName +
+    local.region +
     ", " +
     local.country +
     ".";
-  dataElement.append(" Provedor: " + local.as);
 
-  const weatherData = await consultOpenMeteo(local.lat, local.lon);
+  const weatherData = await consultOpenMeteo(local.latitude, local.longitude);
   console.log(weatherData);
   dataElement.appendChild(document.createElement("br"));
   dataElement.append(
