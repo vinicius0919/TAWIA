@@ -59,9 +59,22 @@ const consultarFeriados = async (ano, pais) => {
   }
 };
 
+const loadSpinner = () => {
+  const spinner = criarElemento("div", "spinner");
+  spinner.innerHTML = `<div class="loader"></div>`;
+  dataElement.appendChild(spinner);
+};
+
+const clearSpinner = () => {
+  const spinner = dataElement.querySelector(".spinner");
+  if (spinner) spinner.remove();
+};
+
 btn.addEventListener("click", async () => {
   dataElement.innerHTML = ""; // Limpar antes de atualizar
-
+  loadSpinner();
+  btn.disabled = true;
+  btn.textContent = "Carregando...";
   const local = await fetch(`https://ipapi.co/json/`)
     .then((res) => res.json())
     .catch((err) => console.error(err));
@@ -160,6 +173,9 @@ btn.addEventListener("click", async () => {
       )
     );
   }
+  clearSpinner();
+  btn.disabled = false;
+  btn.textContent = "Fale Sobre Onde Eu Estou";
 });
 
 document.addEventListener("DOMContentLoaded", () => {
