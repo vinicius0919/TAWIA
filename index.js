@@ -170,7 +170,7 @@ btn.addEventListener("click", async () => {
       criarElemento(
         "p",
         "info-msg",
-        "📅 Nenhum feriado encontrado para este mês."
+        "📅 Nenhum feriado encontrado para este ano."
       )
     );
   }
