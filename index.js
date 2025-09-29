@@ -48,7 +48,7 @@ const consultOpenMeteo = async (lat, lon) => {
 };
 
 const consultarFeriados = async (ano, mes, pais) => {
-  const url = `https://calendarific.com/api/v2/holidays?&api_key=${calendarificKey}&country=${pais}&year=${ano}&month=${mes}&type=local&language=pt`;
+  const url = `https://calendarific.com/api/v2/holidays?&api_key=${calendarificKey}&country=${pais}&month=${mes}&type=local&language=pt`;
   try {
     const res = await fetch(url);
     if (!res.ok) throw new Error("Erro na API de feriados");
@@ -142,7 +142,7 @@ btn.addEventListener("click", async () => {
   // Feriados
   const ano = new Date().getFullYear();
   const mes = new Date().getMonth() + 1;
-  const feriados = await consultarFeriados(ano, mes, local.country.toUpperCase());
+  const feriados = await consultarFeriados(mes, local.country.toUpperCase());
 
   if (feriados && feriados.response.holidays.length > 0) {
     const feriadoTitle = criarElemento(
